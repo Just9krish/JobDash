@@ -11,7 +11,10 @@
   "dependencies": {
     "@prisma/client": "^5.9.1",
     "@vercel/blob": "^0.22.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
     "date-fns": "^3.3.1",
+    "lucide-react": "^0.338.0",
     "markdown-draft-js": "^2.4.0",
     "nanoid": "^5.0.5",
     "next": "14.1.0",
@@ -19,7 +22,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-draft-wysiwyg": "^1.15.0",
-    "react-markdown": "^9.0.1"
+    "react-markdown": "^9.0.1",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/markdown-draft-js": "^2.2.7",
