@@ -9,7 +9,7 @@ const placeholderJobs = [
     applicationUrl: "https://stripe.com/apply",
     slug: "full-stack-developer-at-stripe-1",
     salary: 150000,
-    approved: true,
+    isApproved: true,
     description: `
   **About Stripe**
   
@@ -60,7 +60,7 @@ const placeholderJobs = [
     applicationUrl: "https://vercel.com/apply",
     slug: "full-stack-developer-at-vercel-2",
     salary: 120000,
-    approved: true,
+    isApproved: true,
     description: `
   **About Vercel:** 
   
@@ -114,7 +114,7 @@ const placeholderJobs = [
     applicationUrl: "https://openai.com/apply",
     slug: "chatgpt-backend-developer-at-openai-3",
     salary: 250000,
-    approved: true,
+    isApproved: true,
     description: `
   **About OpenAI:**
   
@@ -165,7 +165,7 @@ const placeholderJobs = [
     applicationUrl: "https://codinginflow.com",
     slug: "intern-at-coding-in-flow-4",
     salary: 500,
-    approved: true,
+    isApproved: true,
     description: `
   **Help build the best coding tutorials**
   
@@ -180,7 +180,7 @@ const placeholderJobs = [
     applicationUrl: "https://smartdiary.co",
     slug: "contractor-at-smartdiary-co-5",
     salary: 30000,
-    approved: true,
+    isApproved: true,
     description: `
   **Help build the future of journaling**
   
@@ -199,7 +199,7 @@ const placeholderJobs = [
     applicationUrl: "https://careers.microsoft.com",
     slug: "software-engineer-at-microsoft-6",
     salary: 180000,
-    approved: true,
+    isApproved: true,
     description: `
   **About Microsoft:**
   
@@ -249,7 +249,7 @@ const placeholderJobs = [
     applicationUrl: "https://apple.com/apply",
     slug: "full-stack-developer-at-apple-7",
     salary: 200000,
-    approved: true,
+    isApproved: true,
     description: `
   **About Apple:**
   
@@ -303,7 +303,7 @@ const placeholderJobs = [
     applicationUrl: "https://shopify.com/apply",
     slug: "junior-web-developer-at-shopify-8",
     salary: 90000,
-    approved: true,
+    isApproved: true,
     description: `
   **About Shopify:**
   
