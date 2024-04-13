@@ -8,6 +8,7 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import LoginForm from "@/components/Forms/LoginForm";
+import Socials from "@/components/special/Socials";
 
 export default function page() {
   return (
@@ -21,9 +22,7 @@ export default function page() {
       <CardContent>
         <div className="space-y-4">
           <LoginForm />
-          <Button className="w-full" variant="outline">
-            Login with Google
-          </Button>
+          <Socials />
         </div>
         <div className="mt-4 text-center text-sm">
           Don&apos;t have an account?

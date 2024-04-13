@@ -10,7 +10,7 @@ import {
 import bcrypt from "bcryptjs";
 import prisma from "@/lib/prisma";
 import { getUserByEmail } from "@/repeated/user";
-import { signIn } from "@/auth";
+import { signIn, signOut } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { AuthError } from "next-auth";
 
@@ -29,6 +29,8 @@ export async function login(data: LoginInput) {
       password,
       redirectTo: DEFAULT_LOGIN_REDIRECT,
     });
+
+    return { success: "Login successful!" };
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
@@ -44,7 +46,12 @@ export async function login(data: LoginInput) {
   }
 }
 
+export async function logout() {
+  await signOut();
+}
+
 export async function register(data: RegisterInput) {
+  console.log("Registering user", data);
   const validatedField = registerSchema.safeParse(data);
 
   if (!validatedField.success) {

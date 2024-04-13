@@ -1,9 +1,11 @@
 "use client";
+
 import Image from "next/image";
 import logo from "@/assets/jobdash-logo.png";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
+import { logout } from "@/actions/auth.action";
 
 export default function Topbar() {
   const pathname = usePathname();
@@ -20,6 +22,7 @@ export default function Topbar() {
               <Link href="/jobs/new">Post a job</Link>
             </Button>
           )}
+          <Button onClick={() => logout()}>Logout</Button>
         </nav>
       </div>
     </header>

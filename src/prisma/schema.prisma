@@ -8,6 +8,12 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+    USER
+    ADMIN
+    RECRUITER
+}
+
 model Job {
     id               String   @id @default(uuid())
     slug             String   @unique
@@ -38,6 +44,7 @@ model User {
     isEmailVerified Boolean   @default(false)
     emailVerifiedAt DateTime?
     profileImg      String?
+    role            UserRole @default(USER)
     createdAt       DateTime  @default(now())
     updatedAt       DateTime  @updatedAt
     accounts        Account[]
