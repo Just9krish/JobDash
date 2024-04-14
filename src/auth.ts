@@ -24,10 +24,51 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     LinkedIn({
       clientId: process.env.LINKEDIN_CLIENT_ID as string,
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET as string,
+      issuer: "https://www.linkedin.com",
+      userinfo: {
+        url: "https://api.linkedin.com/v2/userinfo",
+      },
+      authorization: {
+        url: "https://www.linkedin.com/oauth/v2/authorization",
+        params: {
+          scope: "profile email openid",
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
+      token: {
+        url: "https://www.linkedin.com/oauth/v2/accessToken",
+      },
+      jwks_endpoint: "https://www.linkedin.com/oauth/openid/jwks",
+      profile(profile, tokens) {
+        console.log("linkedin profile", profile);
+        console.log("linkedin token", tokens);
+        const defaultImage =
+          "https://cdn-icons-png.flaticon.com/512/174/174857.png";
+        return {
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture ?? defaultImage,
+        };
+      },
+      allowDangerousEmailAccountLinking: true,
     }),
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      async profile(profile) {
+        console.log("google profile", profile);
+
+        return {
+          email: profile.email,
+          image: profile.image,
+          firstName: profile.given_name,
+          lastName: profile.family_name,
+          profileImg: profile.picture,
+        };
+      },
     }),
     Credentials({
       async authorize(credentials) {
@@ -98,5 +139,24 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
     //   return true;
     // }
+  },
+
+  events: {
+    async linkAccount({ user }) {
+      await prisma?.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          emailVerified: true,
+          emailVerifiedAt: new Date(),
+        },
+      });
+    },
+  },
+
+  pages: {
+    signIn: "/login",
+    error: "/error",
   },
 });

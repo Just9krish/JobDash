@@ -89,38 +89,6 @@ export default function RegisterForm() {
         <div className="flex w-full items-center gap-4">
           <FormField
             control={form.control}
-            name="gender"
-            render={({ field }) => (
-              <FormItem className="flex-1 space-y-3">
-                <FormLabel>Select a gender</FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex gap-3"
-                  >
-                    {GENDERS.map((gender) => (
-                      <FormItem
-                        key={gender.id}
-                        className="flex items-center space-x-3 space-y-0"
-                      >
-                        <FormControl>
-                          <RadioGroupItem value={gender.value} />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          {gender.label}
-                        </FormLabel>
-                      </FormItem>
-                    ))}
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem className="flex-1 space-y-2">

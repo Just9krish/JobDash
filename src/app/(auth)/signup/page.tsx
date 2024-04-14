@@ -8,10 +8,11 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import RegisterForm from "@/components/Forms/RegisterForm";
+import Socials from "@/components/special/Socials";
 
 export default function page() {
   return (
-    <Card className="mx-auto max-w-xl">
+    <Card className="mx-auto max-w-lg">
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl font-bold">Registration</CardTitle>
         <CardDescription>
@@ -21,9 +22,7 @@ export default function page() {
       <CardContent>
         <div className="space-y-4">
           <RegisterForm />
-          <Button className="w-full" variant="outline">
-            Login with Google
-          </Button>
+          <Socials />
         </div>
         <div className="mt-4 text-center text-sm">
           Already have account?

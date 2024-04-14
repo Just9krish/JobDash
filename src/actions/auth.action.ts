@@ -58,7 +58,7 @@ export async function register(data: RegisterInput) {
     return { error: "Invalid fields!" };
   }
 
-  const { email, firstName, lastName, password, gender } = validatedField.data;
+  const { email, firstName, lastName, password } = validatedField.data;
 
   const existingUser = await getUserByEmail(email);
 
@@ -73,7 +73,6 @@ export async function register(data: RegisterInput) {
       email,
       firstName,
       lastName,
-      gender,
       password: hashedPassword,
     },
   });

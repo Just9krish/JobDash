@@ -10,7 +10,7 @@ export const publicRoutes = ["/"];
  * This routes does required authentication
  * @type {string[]}
  */
-export const authRoutes = ["/login", "/signup"];
+export const authRoutes = ["/login", "/signup", "/error"];
 
 /**
  * The prefix for API authentication routes

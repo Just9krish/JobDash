@@ -6,7 +6,6 @@ import {
   Card,
 } from "@/components/ui/card";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import LoginForm from "@/components/Forms/LoginForm";
 import Socials from "@/components/special/Socials";
 

@@ -20,7 +20,6 @@ export const registerSchema = z
     }),
     firstName: z.string({ required_error: "Please enter first name!" }),
     lastName: z.string({ required_error: "Please enter last name!" }),
-    gender: z.string({ required_error: "Please select gender!" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password don't match!",
