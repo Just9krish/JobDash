@@ -2,6 +2,11 @@
 
 import prisma from "@/lib/prisma";
 
+/**
+ * Retrieves distinct locations from the database.
+ *
+ * @returns An array of strings representing distinct locations.
+ */
 export async function getDistinctLocations() {
   const location = await prisma?.job.findMany({
     where: { isApproved: true },

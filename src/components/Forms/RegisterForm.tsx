@@ -17,8 +17,7 @@ import { useForm } from "react-hook-form";
 import { RegisterInput, registerSchema } from "@/schema/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { register } from "@/actions/auth.action";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { GENDERS } from "@/lib/constant";
+import { Checkbox } from "../ui/checkbox";
 
 export default function RegisterForm() {
   const [success, setSuccess] = useState<string | undefined>("");
@@ -30,14 +29,16 @@ export default function RegisterForm() {
   });
 
   const onsubmit = (data: RegisterInput) => {
+    console.log(data);
+
     setError("");
     setSuccess("");
-    transitionStartFcn(() => {
-      register(data).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
-      });
-    });
+    // transitionStartFcn(() => {
+    //   register(data).then((data) => {
+    //     setError(data.error);
+    //     setSuccess(data.success);
+    //   });
+    // });
   };
   return (
     <Form {...form}>
@@ -131,6 +132,24 @@ export default function RegisterForm() {
                 />
               </FormControl>
               <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="isTwoFactorEnabled"
+          render={({ field }) => (
+            <FormItem className="flex items-center gap-2">
+              <Checkbox
+                id="isTwoFactorEnabled"
+                checked={field.value}
+                onCheckedChange={field.onChange}
+                className="accent-black"
+              />
+              <FormLabel className="!mt-0" htmlFor="isTwoFactorEnabled">
+                Enable 2FA
+              </FormLabel>
             </FormItem>
           )}
         />

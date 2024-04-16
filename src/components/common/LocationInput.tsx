@@ -1,6 +1,6 @@
 import { forwardRef, useMemo, useState } from "react";
 import { Input } from "../ui/input";
-import { City } from "country-state-city";
+import { City, Country } from "country-state-city";
 
 interface LocationInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {

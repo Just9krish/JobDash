@@ -21,7 +21,8 @@ export default function page() {
       <CardContent>
         <div className="space-y-4">
           <LoginForm />
-          <Socials />
+          <p className="text-center">Or</p>
+          <Socials label="Login" />
         </div>
         <div className="mt-4 text-center text-sm">
           Don&apos;t have an account?

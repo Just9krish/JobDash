@@ -3,14 +3,20 @@
  * This routes does not required authentication
  * @type {string[]}
  */
-export const publicRoutes = ["/"];
+export const publicRoutes = ["/", "/new-verification"];
 
 /**
  * An array of routes that are protected
  * This routes does required authentication
  * @type {string[]}
  */
-export const authRoutes = ["/login", "/signup", "/error"];
+export const authRoutes = [
+  "/login",
+  "/signup",
+  "/error",
+  "/reset",
+  "/new-password",
+];
 
 /**
  * The prefix for API authentication routes

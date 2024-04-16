@@ -14,6 +14,12 @@ import { put } from "@vercel/blob";
 import path from "path";
 import { JOB_PER_PAGE } from "@/lib/constant";
 
+/**
+ * Filters jobs based on the provided form data and redirects to the filtered job page.
+ *
+ * @param formData - The form data containing the filter values.
+ * @returns void
+ */
 export async function filterJobs(formData: FormData) {
   const values = Object.fromEntries(formData.entries());
 
@@ -29,6 +35,14 @@ export async function filterJobs(formData: FormData) {
   redirect(`/?${searchParams.toString()}`);
 }
 
+/**
+ * Retrieves a list of jobs based on the provided filter values and pagination options.
+ *
+ * @param {Object} options - The options for retrieving jobs.
+ * @param {JobFilterValues} options.jobFilterValues - The filter values to apply to the job search.
+ * @param {number} [options.page=1] - The page number for pagination.
+ * @returns {Promise<Object>} - A promise that resolves to an object containing the retrieved jobs and the total count of jobs.
+ */
 export async function getJobs({
   jobFilterValues,
   page = 1,
@@ -91,6 +105,12 @@ export async function getJobs({
   return { jobs, jobsCount };
 }
 
+/**
+ * Retrieves a job based on its slug.
+ *
+ * @param slug - The slug of the job.
+ * @returns The job object if found, otherwise undefined.
+ */
 export async function getJob(slug: string) {
   const job = await prisma.job.findUnique({
     where: { slug },
@@ -99,6 +119,12 @@ export async function getJob(slug: string) {
   return job;
 }
 
+/**
+ * Creates a new job entry in the database.
+ *
+ * @param formData - The form data containing the job details.
+ * @returns {Promise<void>} - A promise that resolves when the job is created.
+ */
 export async function createJob(formData: FormData) {
   const values = Object.fromEntries(formData.entries());
 

@@ -8,6 +8,7 @@ import { loginSchema } from "./schema/auth.schema";
 import { getUserByEmail, getUserById } from "./repeated/user";
 import bcrypt from "bcryptjs";
 import { UserRole } from "@prisma/client";
+import { getTwoFactorConfirmationByUserId } from "@/repeated/twoFactorConfirmation";
 
 declare module "next-auth" {
   interface Session {
@@ -21,53 +22,66 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   session: { strategy: "jwt" },
   adapter: PrismaAdapter(prisma),
   providers: [
-    LinkedIn({
-      clientId: process.env.LINKEDIN_CLIENT_ID as string,
-      clientSecret: process.env.LINKEDIN_CLIENT_SECRET as string,
-      issuer: "https://www.linkedin.com",
-      userinfo: {
-        url: "https://api.linkedin.com/v2/userinfo",
-      },
-      authorization: {
-        url: "https://www.linkedin.com/oauth/v2/authorization",
-        params: {
-          scope: "profile email openid",
-          prompt: "consent",
-          access_type: "offline",
-          response_type: "code",
-        },
-      },
-      token: {
-        url: "https://www.linkedin.com/oauth/v2/accessToken",
-      },
-      jwks_endpoint: "https://www.linkedin.com/oauth/openid/jwks",
-      profile(profile, tokens) {
-        console.log("linkedin profile", profile);
-        console.log("linkedin token", tokens);
-        const defaultImage =
-          "https://cdn-icons-png.flaticon.com/512/174/174857.png";
-        return {
-          id: profile.sub,
-          name: profile.name,
-          email: profile.email,
-          image: profile.picture ?? defaultImage,
-        };
-      },
-      allowDangerousEmailAccountLinking: true,
-    }),
+    // LinkedIn({
+    //   clientId: process.env.LINKEDIN_CLIENT_ID as string,
+    //   clientSecret: process.env.LINKEDIN_CLIENT_SECRET as string,
+    //   issuer: "https://www.linkedin.com",
+    //   userinfo: {
+    //     url: "https://api.linkedin.com/v2/userinfo",
+    //   },
+    //   authorization: {
+    //     url: "https://www.linkedin.com/oauth/v2/authorization",
+    //     params: {
+    //       scope: "profile email openid",
+    //       prompt: "consent",
+    //       access_type: "offline",
+    //       response_type: "code",
+    //     },
+    //   },
+    //   token: {
+    //     url: "https://www.linkedin.com/oauth/v2/accessToken",
+    //   },
+    //   jwks_endpoint: "https://www.linkedin.com/oauth/openid/jwks",
+    //   profile(profile, tokens) {
+    //     console.log("linkedin profile", profile);
+    //     console.log("linkedin token", tokens);
+    //     const defaultImage =
+    //       "https://cdn-icons-png.flaticon.com/512/174/174857.png";
+    //     return {
+    //       id: profile.sub,
+    //       name: profile.name,
+    //       email: profile.email,
+    //       image: profile.picture ?? defaultImage,
+    //     };
+    //   },
+    //   allowDangerousEmailAccountLinking: true,
+    // }),
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      allowDangerousEmailAccountLinking: true,
       async profile(profile) {
         console.log("google profile", profile);
 
-        return {
-          email: profile.email,
-          image: profile.image,
-          firstName: profile.given_name,
-          lastName: profile.family_name,
-          profileImg: profile.picture,
-        };
+        const existingUser = await prisma.user.findUnique({
+          where: {
+            email: profile.email,
+          },
+        });
+
+        console.log("existing user", existingUser);
+
+        if (existingUser) {
+          return existingUser;
+        } else {
+          return {
+            email: profile.email,
+            image: profile.image,
+            firstName: profile.given_name,
+            lastName: profile.family_name,
+            profileImg: profile.picture,
+          };
+        }
       },
     }),
     Credentials({
@@ -123,22 +137,39 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
 
-    // async signIn({ user }) {
+    async signIn({ user, account }) {
+      if (account?.provider !== "credentials") return true;
 
-    //   if (!user.id) return false;
+      if (user.id) {
+        const existingUser = await getUserById(user.id);
 
-    //   console.log('user', user);
+        // Prevent unverified user to login
+        if (!existingUser?.emailVerified) return false;
 
-    //   const existingUser = await getUserById(user.id);
+        // TODO: Add 2FA check
+        if (existingUser.isTwoFactorEnabled) {
+          const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
+            existingUser.id,
+          );
 
-    //   if (!existingUser || !existingUser.isEmailVerified) {
-    //     console.log('existingUser', existingUser);
-    //     return false;
-    //   }
-    //   console.log("run");
+          console.log("2FA", twoFactorConfirmation);
 
-    //   return true;
-    // }
+          if (!twoFactorConfirmation) return false;
+
+          // Delete twoFactorConfirmation for next sign in
+
+          await prisma.twoFactorConfirmation.delete({
+            where: {
+              id: twoFactorConfirmation.id,
+            },
+          });
+        }
+      } else {
+        return false;
+      }
+
+      return true;
+    },
   },
 
   events: {

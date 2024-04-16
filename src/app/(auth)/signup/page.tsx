@@ -22,7 +22,8 @@ export default function page() {
       <CardContent>
         <div className="space-y-4">
           <RegisterForm />
-          <Socials />
+          <p className="text-center">Or</p>
+          <Socials label="Sign up" />
         </div>
         <div className="mt-4 text-center text-sm">
           Already have account?
