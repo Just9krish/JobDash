@@ -37,7 +37,7 @@ export default function LoginForm() {
     resolver: zodResolver(loginSchema),
   });
 
-  console.log(form.formState.errors)
+  console.log(form.formState.errors);
 
   const onsubmit = (data: LoginInput) => {
     console.log("Submitting", data);
@@ -48,7 +48,7 @@ export default function LoginForm() {
       login(data)
         .then((data) => {
           console.log(data);
-          
+
           if (data.error) {
             // form.reset();
             setError(data.error);

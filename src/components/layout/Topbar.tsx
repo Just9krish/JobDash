@@ -6,9 +6,11 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
 import { logout } from "@/actions/auth.action";
+import { useCurrentUser } from "@/hooks";
 
 export default function Topbar() {
   const pathname = usePathname();
+  const user = useCurrentUser();
 
   return (
     <header className="w-full px-3 py-4 shadow-sm">
@@ -22,7 +24,7 @@ export default function Topbar() {
               <Link href="/jobs/new">Post a job</Link>
             </Button>
           )}
-          <Button onClick={() => logout()}>Logout</Button>
+          {user && <Button onClick={() => logout()}>Logout</Button>}
         </nav>
       </div>
     </header>
