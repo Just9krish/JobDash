@@ -44,8 +44,8 @@ export function PopularCategories({
   handleCategoryChange: (categoryId: string) => void;
   selectedCategoryId: string;
 }) {
-  const [popularCategories, setPopularCategories] = useState<JobCategory[]>([]);
   const [isCategoryLoading, setIsCategoryLoading] = useState<boolean>(true);
+  const [popularCategories, setPopularCategories] = useState<JobCategory[]>([]);
 
   useEffect(() => {
     setIsCategoryLoading(true);
@@ -59,14 +59,8 @@ export function PopularCategories({
         console.error(error);
         setIsCategoryLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // const handleCategoryClick = useCallback(
-  //   (categoryId: string) => {
-  //     handleCategoryChange(categoryId);
-  //   },
-  //   [handleCategoryChange]
-  // );
 
   return (
     <div className="flex items-center gap-6">
