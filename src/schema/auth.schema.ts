@@ -21,7 +21,7 @@ export const registerSchema = z
     }),
     firstName: z.string({ required_error: "Please enter first name!" }),
     lastName: z.string({ required_error: "Please enter last name!" }),
-    isTwoFactorEnabled: z.boolean(),
+    isTwoFactorEnabled: z.optional(z.boolean()),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password don't match!",

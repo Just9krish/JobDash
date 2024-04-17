@@ -5,7 +5,8 @@ generator client {
 
 datasource db {
     provider = "postgresql"
-    url      = env("DATABASE_URL")
+    // url      = env("DATABASE_URL")
+    url = "postgres://postgres:Password@localhost:5432/jobdash"
 }
 
 enum UserRole {
@@ -15,8 +16,8 @@ enum UserRole {
 }
 
 model Job {
-    id               String   @id @default(uuid())
-    slug             String   @unique
+    id               String       @id @default(uuid())
+    slug             String       @unique
     title            String
     type             String
     locationType     String
@@ -27,11 +28,21 @@ model Job {
     applicationEmail String?
     applicationUrl   String?
     companyLogoUrl   String?
-    isApproved       Boolean  @default(false)
-    createdAt        DateTime @default(now())
-    updatedAt        DateTime @updatedAt
+    isApproved       Boolean      @default(false)
+    createdAt        DateTime     @default(now())
+    updatedAt        DateTime     @updatedAt
+    JobCategory      JobCategory? @relation(fields: [jobCategoryId], references: [id])
+    jobCategoryId    String?
 
     @@map("jobs")
+}
+
+model JobCategory {
+    id    String @id @default(uuid())
+    value String @unique
+    label String
+
+    jobs Job[] 
 }
 
 model User {

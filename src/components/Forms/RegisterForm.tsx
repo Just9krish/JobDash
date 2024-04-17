@@ -33,12 +33,18 @@ export default function RegisterForm() {
 
     setError("");
     setSuccess("");
-    // transitionStartFcn(() => {
-    //   register(data).then((data) => {
-    //     setError(data.error);
-    //     setSuccess(data.success);
-    //   });
-    // });
+    transitionStartFcn(() => {
+      register(data).then((data) => {
+        if (data.error) {
+          setError(data.error);
+        }
+
+        if (data.success) {
+          form.reset();
+          setSuccess(data.success);
+        }
+      });
+    });
   };
   return (
     <Form {...form}>

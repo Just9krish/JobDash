@@ -1,3 +1,16 @@
+export const navigation = [
+  {
+    id: 1,
+    label: "Home",
+    path: "/",
+  },
+  {
+    id: 2,
+    label: "Jobs",
+    path: "/jobs",
+  },
+];
+
 export const JOB_TYPES = [
   {
     id: 1,

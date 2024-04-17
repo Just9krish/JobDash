@@ -9,11 +9,14 @@ import { getUserByEmail, getUserById } from "./repeated/user";
 import bcrypt from "bcryptjs";
 import { UserRole } from "@prisma/client";
 import { getTwoFactorConfirmationByUserId } from "@/repeated/twoFactorConfirmation";
+import { getAcountByUserId } from "./repeated/accounts";
 
 declare module "next-auth" {
   interface Session {
     user: {
       role: UserRole;
+      isTwoFactorEnabled: boolean;
+      isOauth: boolean;
     } & DefaultSession["user"];
   }
 }
@@ -120,6 +123,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return token;
       }
 
+      const existingAccount = await getAcountByUserId(user.id);
+      token.isOauth = !!existingAccount;
+      token.isTwoFactorEnabled = user.isTwoFactorEnabled;
       token.role = user.role;
 
       return token;
@@ -132,6 +138,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       if (token.role && session.user) {
         session.user.role = token.role as UserRole;
+        session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
+        session.user.isOauth = token.isOauth as boolean;
       }
 
       return session;

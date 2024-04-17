@@ -32,7 +32,7 @@ export async function filterJobs(formData: FormData) {
     ...(remote && { remote: "true" }),
   });
 
-  redirect(`/?${searchParams.toString()}`);
+  redirect(`/jobs/?${searchParams.toString()}`);
 }
 
 /**
@@ -180,4 +180,18 @@ export async function createJob(formData: FormData) {
   console.log("submitted");
 
   redirect("/");
+}
+
+export async function getJobsWithJobCategoryId(
+  jobCategoryId: string,
+  limit?: number,
+) {
+  const jobs = await prisma.job.findMany({
+    where: {
+      jobCategoryId: jobCategoryId,
+    },
+    take: limit ? limit : undefined,
+  });
+
+  return jobs;
 }

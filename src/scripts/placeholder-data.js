@@ -9,6 +9,7 @@ const placeholderJobs = [
     applicationUrl: "https://stripe.com/apply",
     slug: "full-stack-developer-at-stripe-1",
     salary: 150000,
+    jobCategoryId: "6867f580-6eea-4e37-9df5-f7a1d3faabab",
     isApproved: true,
     description: `
   **About Stripe**
@@ -54,6 +55,7 @@ const placeholderJobs = [
     title: "Full-Stack Developer at Vercel",
     type: "Full-time",
     companyName: "Vercel",
+    jobCategoryId: "6867f580-6eea-4e37-9df5-f7a1d3faabab",
     locationType: "Hybrid",
     location: "San Francisco, California, United States",
     applicationEmail: "apply@vercel.com",
@@ -109,6 +111,7 @@ const placeholderJobs = [
     title: "ChatGPT Backend Developer at OpenAI",
     type: "Part-time",
     companyName: "OpenAI",
+    jobCategoryId: "6867f580-6eea-4e37-9df5-f7a1d3faabab",
     locationType: "On-site",
     location: "San Francisco, California, United States",
     applicationUrl: "https://openai.com/apply",
@@ -161,6 +164,7 @@ const placeholderJobs = [
     title: "Intern at Coding in Flow",
     type: "Internship",
     companyName: "Coding in Flow",
+    jobCategoryId: "6867f580-6eea-4e37-9df5-f7a1d3faabab",
     locationType: "Remote",
     applicationUrl: "https://codinginflow.com",
     slug: "intern-at-coding-in-flow-4",
@@ -176,6 +180,7 @@ const placeholderJobs = [
     title: "Contractor at SmartDiary.co",
     type: "Contract",
     companyName: "SmartDiary.co",
+    jobCategoryId: "6867f580-6eea-4e37-9df5-f7a1d3faabab",
     locationType: "Remote",
     applicationUrl: "https://smartdiary.co",
     slug: "contractor-at-smartdiary-co-5",
@@ -194,6 +199,7 @@ const placeholderJobs = [
     type: "Temporary",
     companyName: "Microsoft",
     locationType: "On-site",
+    jobCategoryId: "6867f580-6eea-4e37-9df5-f7a1d3faabab",
     location: "Redmond, Washington, United States",
     applicationEmail: "applications@microsoft.com",
     applicationUrl: "https://careers.microsoft.com",
@@ -244,6 +250,7 @@ const placeholderJobs = [
     title: "Full-Stack Developer at Apple",
     type: "Full-time",
     companyName: "Apple Inc.",
+    jobCategoryId: "6867f580-6eea-4e37-9df5-f7a1d3faabab",
     locationType: "Hybrid",
     location: "Cupertino, California, United States",
     applicationUrl: "https://apple.com/apply",
@@ -297,6 +304,7 @@ const placeholderJobs = [
     title: "Junior Web Developer at Shopify",
     type: "Part-time",
     companyName: "Shopify",
+    jobCategoryId: "6867f580-6eea-4e37-9df5-f7a1d3faabab",
     locationType: "Hybrid",
     location: "Ottawa, Ontario, Canada",
     applicationEmail: "career@shopify.com",
@@ -346,6 +354,36 @@ const placeholderJobs = [
   },
 ];
 
+const placeholderJobCategories = [
+  { value: "it", label: "Information Technology (IT)" },
+  { value: "healthcare", label: "Healthcare" },
+  { value: "finance", label: "Finance" },
+  { value: "education", label: "Education" },
+  { value: "sales", label: "Sales" },
+  { value: "marketing", label: "Marketing" },
+  { value: "engineering", label: "Engineering" },
+  { value: "customer_service", label: "Customer Service" },
+  { value: "human_resources", label: "Human Resources (HR)" },
+  { value: "administration", label: "Administration" },
+  { value: "legal", label: "Legal" },
+  { value: "operations", label: "Operations" },
+  { value: "retail", label: "Retail" },
+  { value: "hospitality", label: "Hospitality" },
+  { value: "construction", label: "Construction" },
+  { value: "media_communications", label: "Media and Communications" },
+  { value: "design_creative", label: "Design and Creative" },
+  { value: "science_research", label: "Science and Research" },
+  {
+    value: "transportation_logistics",
+    label: "Transportation and Logistics",
+  },
+  {
+    value: "non_profit_social_services",
+    label: "Non-profit and Social Services",
+  },
+];
+
 module.exports = {
   placeholderJobs,
+  placeholderJobCategories,
 };

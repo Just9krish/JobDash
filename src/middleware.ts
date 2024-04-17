@@ -5,6 +5,7 @@ import {
   authRoutes,
   publicRoutes,
 } from "@/routes";
+import { NextRequest } from "next/server";
 
 export default auth((req) => {
   const { nextUrl } = req;

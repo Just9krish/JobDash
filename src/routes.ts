@@ -3,7 +3,7 @@
  * This routes does not required authentication
  * @type {string[]}
  */
-export const publicRoutes = ["/", "/new-verification"];
+export const publicRoutes = ["/", "/new-verification", "/jobs", "/jobs/:slug*"];
 
 /**
  * An array of routes that are protected
