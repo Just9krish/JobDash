@@ -31,11 +31,14 @@ export default async function Home({ searchParams }: PageProps) {
 
   return (
     <section>
-      <div className="space-y-5 text-center">
+      <div className="mb-16 space-y-5 text-center">
         <h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
-          Developer jobs
+          Find Your Next Job Here
         </h2>
-        <p className="text-muted-foreground">Find your dream job.</p>
+        <p className="text-muted-foreground">
+          Discover employment opportunities tailored to your skills and
+          interests.
+        </p>
       </div>
       <div className="flex flex-col gap-4 md:flex-row">
         <FilterSidebar filterValue={filtrValues} />

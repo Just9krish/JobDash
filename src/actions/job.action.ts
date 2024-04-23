@@ -195,3 +195,16 @@ export async function getJobsWithJobCategoryId(
 
   return jobs;
 }
+
+export async function getStaticJobs() {
+  const jobs = await prisma.job.findMany({
+    where: {
+      isApproved: true,
+    },
+    select: {
+      slug: true,
+    },
+  });
+
+  return jobs;
+}

@@ -32,12 +32,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
-    <div>
-      <Topbar />
-      <main className="m-auto my-10 max-w-5xl space-y-5 px-3">{children}</main>
-      <Footer />
-      <Toaster />
-    </div>
+    <SessionProvider session={session}>
+      <html className={chivo.variable + rubik.variable} lang="en">
+        <body>
+          {children}
+
+          <Toaster />
+        </body>
+      </html>
+    </SessionProvider>
   );
 }

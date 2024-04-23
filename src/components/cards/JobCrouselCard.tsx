@@ -8,12 +8,12 @@ import Link from "next/link";
 
 export default function JobCrouselCard({ job }: { job: Job }) {
   return (
-    <Card>
+    <Card className="flex h-full flex-col">
       <CardHeader className="border-b">
         <h3 className="font-medium text-primary">{job.title}</h3>
         <p className="text-sm text-muted-foreground">{job.companyName}</p>
       </CardHeader>
-      <CardContent className="flex min-h-44 flex-col justify-between gap-4 pt-4">
+      <CardContent className="flex grow flex-col justify-between gap-14 pt-4">
         <div>
           <p className="flex items-center gap-1.5 text-sm">
             <Briefcase className="shrink-0" size={16} />
@@ -28,7 +28,7 @@ export default function JobCrouselCard({ job }: { job: Job }) {
             {formatMoney(job.salary)}
           </p>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-end justify-between">
           <Badge>{job.type}</Badge>
           <Link className=" flex items-center" href={"/jobs/" + job.slug}>
             View Details <ChevronRight />

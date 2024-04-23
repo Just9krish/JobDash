@@ -1,10 +1,34 @@
-import { getJob } from "@/actions/job.action";
+import { getJob, getStaticJobs } from "@/actions/job.action";
 import BackButton from "@/components/common/BackButton";
 import JobDetails from "@/components/common/JobDetails";
+import { notFound } from "next/navigation";
 import { cache } from "react";
+import prisma from "@/lib/prisma";
 
 interface PageProps {
   params: { slug: string };
+}
+
+const getStaticJob = cache(async (slug: string) => {
+  const job = await prisma.job.findUnique({
+    where: { slug },
+  });
+
+  if (!job) notFound();
+
+  return job;
+});
+
+export async function generateStaticParams() {
+  const jobs = await getStaticJobs();
+
+  return jobs.map(({ slug }) => slug);
+}
+
+export async function generateMetadata({ params: { slug } }: PageProps) {
+  const job = await getStaticJob(slug);
+
+  return { title: job?.title };
 }
 
 export default async function page({ params: { slug } }: PageProps) {

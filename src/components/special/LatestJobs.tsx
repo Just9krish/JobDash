@@ -24,8 +24,8 @@ export default function LatestJobs() {
   };
 
   return (
-    <section>
-      <h4 className="mb-4 text-center text-3xl font-medium text-primary">
+    <section className="py-16">
+      <h4 className="mb-12 text-center text-3xl font-bold text-primary">
         Latest Jobs on Jobdash
       </h4>
       <PopularCategories
@@ -63,9 +63,11 @@ export function PopularCategories({
   }, []);
 
   return (
-    <div className="flex items-center gap-6">
-      <h4 className="text-muted-foreground">POPULAR CATEGORIES:</h4>
-      <ul className="flex items-center gap-4">
+    <div className="flex items-start gap-6">
+      <h5 className="whitespace-nowrap text-muted-foreground">
+        POPULAR CATEGORIES:
+      </h5>
+      <ul className="flex flex-wrap items-center gap-4">
         {isCategoryLoading ? (
           <CategoriesSkeletons />
         ) : (

@@ -5,19 +5,23 @@ import {
   authRoutes,
   publicRoutes,
 } from "@/routes";
-import { NextRequest } from "next/server";
 
 export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  console.log("pathanme", nextUrl.pathname);
+  // const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isPublicRoute = publicRoutes.some((route) => {
+    const regex = new RegExp(`^${route.replace(/:[^\s/]+/g, "[^/]+")}$`);
+    return regex.test(nextUrl.pathname);
+  });
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
-  console.log("API Auth route", isApiAuthRoute);
-  console.log("public route", isPublicRoute);
-  console.log("Auth route", isApiAuthRoute);
+  console.log("API Auth route: ", isApiAuthRoute);
+  console.log("public route: ", isPublicRoute);
+  console.log("Auth route: ", isApiAuthRoute);
 
   if (isApiAuthRoute) {
     return;

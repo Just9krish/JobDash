@@ -33,16 +33,6 @@ async function addJobCategory() {
   );
 }
 
-addJobs()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error("Error while seeding database:", e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
-
 // addJobCategory()
 //   .then(async () => {
 //     await prisma.$disconnect();
@@ -52,3 +42,13 @@ addJobs()
 //     await prisma.$disconnect();
 //     process.exit(1);
 //   });
+
+addJobs()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error("Error while seeding database:", e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });

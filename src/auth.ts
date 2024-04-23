@@ -17,6 +17,8 @@ declare module "next-auth" {
       role: UserRole;
       isTwoFactorEnabled: boolean;
       isOauth: boolean;
+      firstName: string;
+      lastName: string;
     } & DefaultSession["user"];
   }
 }
@@ -127,6 +129,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       token.isOauth = !!existingAccount;
       token.isTwoFactorEnabled = user.isTwoFactorEnabled;
       token.role = user.role;
+      token.firstName = user.firstName;
+      token.lastName = user.lastName;
 
       return token;
     },
@@ -140,6 +144,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session.user.role = token.role as UserRole;
         session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
         session.user.isOauth = token.isOauth as boolean;
+        session.user.firstName = token.firstName as string;
+        session.user.lastName = token.lastName as string;
       }
 
       return session;

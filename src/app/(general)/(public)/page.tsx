@@ -1,5 +1,6 @@
 import LatestJobs from "@/components/special/LatestJobs";
 import TopCompanies from "./_components/TopCompanies";
+import Statics from "./_components/Statics";
 
 export default function page() {
   return (
@@ -9,6 +10,7 @@ export default function page() {
       </h1>
       <LatestJobs />
       <TopCompanies />
+      <Statics />
     </div>
   );
 }

@@ -79,3 +79,35 @@ export function toSlug(str: string) {
 export function capitalizeString(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+/**
+ * Generates initials from a given first name and last name.
+ *
+ * @param {string} firstName - The first name.
+ * @param {string} lastName - The last name.
+ * @returns {string} The initials.
+ */
+export function createInitials(firstName: string, lastName: string) {
+  if (!firstName && !lastName) {
+    return ""; // Return empty string if both first and last name are not provided
+  }
+
+  // Extracting the first letter of each word and converting to uppercase
+  const firstInitial = firstName
+    ? firstName
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase())
+        .join("")
+    : "";
+  const lastInitial = lastName
+    ? lastName
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase())
+        .join("")
+    : "";
+
+  // Creating the 2-character initials
+  const initials = `${firstInitial}${lastInitial}`;
+
+  return initials;
+}
