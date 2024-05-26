@@ -129,4 +129,6 @@ model WishlistJob {
     jobId   String
     job     Job    @relation(fields: [jobId], references: [id], onDelete: Cascade)
     user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, jobId])
 }

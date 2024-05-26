@@ -6,7 +6,7 @@ export default function page() {
   return (
     <div>
       <h1 className="my-20 text-center text-4xl font-extrabold tracking-tight lg:text-5xl">
-        Make you dream creer a reality
+        Make you dream career a reality
       </h1>
       <LatestJobs />
       <TopCompanies />

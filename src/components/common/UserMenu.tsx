@@ -9,6 +9,7 @@ import {
 import Avataar from "../special/Avataar";
 import ConfirmationDialog from "./ConfirmationDialog";
 import { logout } from "@/actions/auth.action";
+import Link from "next/link";
 
 const userMenuOptions = [
   {
@@ -51,10 +52,12 @@ export default function UserMenu() {
         )}
         <DropdownMenuSeparator className="my-4" />
         {userMenuOptions.map((menu) => (
-          <DropdownMenuItem key={menu.value}>{menu.label}</DropdownMenuItem>
+          <Link key={menu.value} href={`/${menu.value}`}>
+            <DropdownMenuItem>{menu.label}</DropdownMenuItem>
+          </Link>
         ))}
         {/* <ConfirmationDialog onConfirm={() => logout()}> */}
-          <DropdownMenuItem onClick={() => logout()}>Log out</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => logout()}>Log out</DropdownMenuItem>
         {/* </ConfirmationDialog> */}
       </DropdownMenuContent>
     </DropdownMenu>

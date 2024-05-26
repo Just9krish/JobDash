@@ -97,10 +97,20 @@ export default async function JobDetails({ job }: PageProps) {
           Apply now
         </Link>
 
-        <Button className="flex w-full items-center justify-center rounded bg-gray-200 p-2 text-sm md:w-fit">
-          <Bookmark className="mr-2 h-4 w-4" />
-          Save for later
-        </Button>
+        <form
+          action={async () => {
+            "use server";
+            await saveJobWishlist({
+              userId: user?.id || "",
+              jobId: job.id,
+            });
+          }}
+        >
+          <Button className="flex w-full items-center justify-center rounded bg-gray-200 p-2 text-sm md:w-fit">
+            <Bookmark className="mr-2 h-4 w-4" />
+            Save for later
+          </Button>
+        </form>
       </div>
     </div>
   );
