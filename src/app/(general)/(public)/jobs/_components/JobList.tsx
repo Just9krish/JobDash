@@ -1,5 +1,5 @@
+import JobCard from "@/components/cards/JobCard";
 import { Job } from "@prisma/client";
-import JobCard from "../cards/JobCard";
 
 interface JobListProps {
   jobs: Job[];

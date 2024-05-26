@@ -182,28 +182,86 @@ export async function createJob(formData: FormData) {
   redirect("/");
 }
 
+/**
+ * Retrieves a list of jobs with the given job category ID.
+ *
+ * @param jobCategoryId - The job category ID.
+ * @param limit - The number of jobs to retrieve.
+ * @returns {Promise<Job[]>} - A promise that resolves with a list of jobs.
+ */
 export async function getJobsWithJobCategoryId(
   jobCategoryId: string,
   limit?: number,
 ) {
+  /**
+   * The WHERE clause for the Prisma query.
+   */
+  const where: Prisma.JobWhereInput = {
+    jobCategoryId,
+  };
+
+  /**
+   * The SELECT clause for the Prisma query.
+   */
+  const select: Prisma.JobSelect = {
+    id: true,
+    title: true,
+    type: true,
+    companyName: true,
+    companyLogoUrl: true,
+    locationType: true,
+    location: true,
+    applicationEmail: true,
+    applicationUrl: true,
+    description: true,
+    salary: true,
+    slug: true,
+  };
+
+  /**
+   * Retrieves a list of jobs with the given job category ID.
+   *
+   * @returns {Promise<Job[]>} - A promise that resolves with a list of jobs.
+   */
   const jobs = await prisma.job.findMany({
-    where: {
-      jobCategoryId: jobCategoryId,
-    },
+    where,
+    select,
     take: limit ? limit : undefined,
   });
 
   return jobs;
 }
 
+/**
+ * Retrieves a list of approved jobs.
+ *
+ * @returns {Promise<Job[]>} - A promise that resolves with a list of approved jobs.
+ */
 export async function getStaticJobs() {
+  /**
+   * The WHERE clause for the Prisma query.
+   *
+   * The `isApproved` field is used to filter out jobs that have not been approved.
+   */
+  const where: Prisma.JobWhereInput = {
+    isApproved: true,
+  };
+
+  /**
+   * The SELECT clause for the Prisma query.
+   *
+   * Only the `slug` field is retrieved for each job.
+   */
+  const select: Prisma.JobSelect = {
+    slug: true,
+  };
+
+  /**
+   * Retrieves a list of approved jobs.
+   */
   const jobs = await prisma.job.findMany({
-    where: {
-      isApproved: true,
-    },
-    select: {
-      slug: true,
-    },
+    where,
+    select,
   });
 
   return jobs;

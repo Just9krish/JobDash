@@ -1,9 +1,9 @@
 import { getJobs } from "@/actions/job.action";
-import FilterSidebar from "@/components/common/FilterSidebar";
-import JobList from "@/components/common/JobList";
 import Pagination from "@/components/common/Pagination";
 import { JOB_PER_PAGE } from "@/lib/constant";
 import { JobFilterValues } from "@/schema/job.schema";
+import FilterSidebar from "./_components/FilterSideBar";
+import JobList from "./_components/JobList";
 
 interface PageProps {
   searchParams: {

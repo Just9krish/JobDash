@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import { useCurrentUser } from "@/hooks";
-import RoleGate from "../special/RoleGate";
+import RoleGate from "@/components/special/RoleGate";
 import { UserRole } from "@prisma/client";
 import { navigation } from "@/lib/constant";
-import UserMenu from "../common/UserMenu";
+import UserMenu from "@/components/common/UserMenu";
 import logo from "@/assets/jobdash-logo.png";
 
 export default function Topbar() {

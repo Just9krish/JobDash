@@ -25,7 +25,6 @@ export default forwardRef<HTMLInputElement, LocationInputProps>(
         .slice(0, 5);
     }, [searchInput]);
 
-    console.log(cities);
 
     return (
       <div>

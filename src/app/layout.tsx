@@ -1,12 +1,10 @@
+import "@/app/globals.css";
 import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/toaster";
-import "@/app/globals.css";
-import Topbar from "@/components/layout/Topbar";
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
 import { Chivo } from "next/font/google";
 import { Rubik } from "next/font/google";
-import Footer from "@/components/layout/Footer";
 
 const chivo = Chivo({
   subsets: ["latin"],
@@ -38,7 +36,6 @@ export default async function RootLayout({
       <html className={chivo.variable + rubik.variable} lang="en">
         <body>
           {children}
-
           <Toaster />
         </body>
       </html>

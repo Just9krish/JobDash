@@ -1,20 +1,20 @@
 "use client";
 
-import { getJobCategories } from "@/actions/jobCategory";
-import { Button } from "../ui/button";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "../ui/carousel";
+} from "@/components/ui/carousel";
 import { getJobsWithJobCategoryId } from "@/actions/job.action";
-import JobCrouselCard from "../cards/JobCrouselCard";
+import JobCrouselCard from "@/components/cards/JobCrouselCard";
 import { Job, JobCategory } from "@prisma/client";
-import { useCallback, useEffect, useState } from "react";
-import CategoriesSkeletons from "../skeletons/CategoriesSkeletons";
-import CrouselCardSkeletons from "../skeletons/CrouselCardSkeletons";
+import { useEffect, useState } from "react";
+import CategoriesSkeletons from "@/app/(general)/(public)/_components/skeletons/CategoriesSkeletons";
+import CrouselCardSkeletons from "@/app/(general)/(public)/_components/skeletons/CrouselCardSkeletons";
+import { getJobCategories } from "@/actions/jobCategory";
+import { Button } from "@/components/ui/button";
 
 export default function LatestJobs() {
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");

@@ -53,9 +53,9 @@ export default function UserMenu() {
         {userMenuOptions.map((menu) => (
           <DropdownMenuItem key={menu.value}>{menu.label}</DropdownMenuItem>
         ))}
-        <ConfirmationDialog onConfirm={() => logout()}>
-          <DropdownMenuItem>Log out</DropdownMenuItem>
-        </ConfirmationDialog>
+        {/* <ConfirmationDialog onConfirm={() => logout()}> */}
+          <DropdownMenuItem onClick={() => logout()}>Log out</DropdownMenuItem>
+        {/* </ConfirmationDialog> */}
       </DropdownMenuContent>
     </DropdownMenu>
   );

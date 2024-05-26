@@ -11,13 +11,16 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import Markdown from "./Markdown";
+import { Button } from "@/components/ui/button";
+import { saveJobWishlist } from "@/actions/wishlist.action";
+import { currentUser } from "@/lib/auth";
+import Markdown from "@/components/common/Markdown";
 
 interface PageProps {
   job: Job;
 }
 
-export default function JobDetails({ job }: PageProps) {
+export default async function JobDetails({ job }: PageProps) {
   const {
     title,
     description,
@@ -29,6 +32,9 @@ export default function JobDetails({ job }: PageProps) {
     salary,
     companyLogoUrl,
   } = job;
+
+  const user = await currentUser();
+
   return (
     <div className="w-full space-y-12">
       <div className="flex flex-col items-start justify-center gap-3 md:flex-row md:justify-start">
@@ -90,13 +96,11 @@ export default function JobDetails({ job }: PageProps) {
           <SendIcon className="mr-2 h-4 w-4" />
           Apply now
         </Link>
-        <Link
-          className="flex w-full items-center justify-center rounded bg-gray-200 p-2 text-sm md:w-fit"
-          href="#"
-        >
+
+        <Button className="flex w-full items-center justify-center rounded bg-gray-200 p-2 text-sm md:w-fit">
           <Bookmark className="mr-2 h-4 w-4" />
           Save for later
-        </Link>
+        </Button>
       </div>
     </div>
   );

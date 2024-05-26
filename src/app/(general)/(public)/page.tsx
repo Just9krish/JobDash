@@ -1,6 +1,6 @@
-import LatestJobs from "@/components/special/LatestJobs";
 import TopCompanies from "./_components/TopCompanies";
 import Statics from "./_components/Statics";
+import LatestJobs from "./_components/LatestJobs";
 
 export default function page() {
   return (

@@ -1,6 +1,5 @@
 import Link from "next/link";
-import BackButton from "../common/BackButton";
-import { Card, CardFooter, CardHeader } from "../ui/card";
+import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 
 export default function ErrorCard() {
   return (

@@ -1,9 +1,9 @@
 import { getJob, getStaticJobs } from "@/actions/job.action";
 import BackButton from "@/components/common/BackButton";
-import JobDetails from "@/components/common/JobDetails";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import prisma from "@/lib/prisma";
+import JobDetails from "./_components/JobDetails";
 
 interface PageProps {
   params: { slug: string };

@@ -9,7 +9,7 @@ datasource db {
     url = "postgres://postgres:Password@localhost:5432/jobdash"
 }
 
-enum UserRole {
+enum UserRole { 
     USER
     ADMIN
     RECRUITER
@@ -33,6 +33,9 @@ model Job {
     updatedAt        DateTime     @updatedAt
     JobCategory      JobCategory? @relation(fields: [jobCategoryId], references: [id])
     jobCategoryId    String?
+    WishlistJob      WishlistJob[]
+
+
 
     @@map("jobs")
 }
@@ -61,7 +64,9 @@ model User {
     createdAt               DateTime               @default(now())
     updatedAt               DateTime               @updatedAt
     accounts                Account[]
+    WishlistJob             WishlistJob[]
     twoFactorConfirmationId String?
+
 }
 
 model Account {
@@ -116,4 +121,12 @@ model TwoFactorConfirmation {
     id     String @id @default(uuid())
     userId String @unique
     user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model WishlistJob {
+    id      String @id @default(uuid())
+    userId  String
+    jobId   String
+    job     Job    @relation(fields: [jobId], references: [id], onDelete: Cascade)
+    user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

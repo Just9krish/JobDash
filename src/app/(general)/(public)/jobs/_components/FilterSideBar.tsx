@@ -1,13 +1,13 @@
 import React from "react";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import Select from "../ui/select";
 import { JOB_TYPES } from "@/lib/constant";
 import { getDistinctLocations } from "@/actions/location.action";
-import { Checkbox } from "../ui/checkbox";
-import { Button } from "../ui/button";
 import { JobFilterValues } from "@/schema/job.schema";
 import { filterJobs } from "@/actions/job.action";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import Select from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 
 interface FilterProps {
   filterValue: JobFilterValues;
